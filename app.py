@@ -128,15 +128,12 @@ with st.sidebar:
 st.session_state["page"] = page
 
     st.markdown("---")
-
     dark = st.toggle("🌙 Dark Mode", value=st.session_state["dark_mode"])
-
     if dark != st.session_state["dark_mode"]:
         st.session_state["dark_mode"] = dark
         st.rerun()
 
     st.markdown("---")
-
     status_ok = CONFIG.is_configured
     status_label = (
         "🟢 watsonx.ai configured"
