@@ -55,7 +55,7 @@ DEFAULTS = {
     "profile": None,
     "roadmap": None,
     "completed_weeks": set(),
-    "page": "Profile",
+    "page": "Home",
 }
 for key, value in DEFAULTS.items():
     st.session_state.setdefault(key, value)
@@ -75,18 +75,57 @@ with st.sidebar:
     st.markdown("---")
 
     page = option_menu(
-        menu_title=None,
-        options=["Profile", "AI Roadmap", "Skill Gap", "Courses & Certs", "Progress Tracker", "Dashboard"],
-        icons=["person-badge", "signpost-split", "bar-chart-steps", "mortarboard", "check2-square", "grid-1x2"],
-        default_index=["Profile", "AI Roadmap", "Skill Gap", "Courses & Certs", "Progress Tracker", "Dashboard"].index(st.session_state["page"]),
-        styles={
-            "container": {"padding": "0", "background-color": "transparent"},
-            "icon": {"color": "#7C5CFF", "font-size": "16px"},
-            "nav-link": {"font-size": "14px", "text-align": "left", "margin": "2px 0", "border-radius": "10px"},
-            "nav-link-selected": {"background": "linear-gradient(120deg, #7C5CFF, #22D3B0)", "color": "white"},
+    menu_title=None,
+    options=[
+        "Home",
+        "Profile",
+        "AI Roadmap",
+        "Skill Gap",
+        "Courses & Certs",
+        "Progress Tracker",
+        "Dashboard",
+    ],
+    icons=[
+        "house",
+        "person-badge",
+        "signpost-split",
+        "bar-chart-steps",
+        "mortarboard",
+        "check2-square",
+        "grid-1x2",
+    ],
+    default_index=[
+        "Home",
+        "Profile",
+        "AI Roadmap",
+        "Skill Gap",
+        "Courses & Certs",
+        "Progress Tracker",
+        "Dashboard",
+    ].index(st.session_state["page"]),
+    styles={
+        "container": {
+            "padding": "0",
+            "background-color": "transparent",
         },
-    )
-    st.session_state["page"] = page
+        "icon": {
+            "color": "#7C5CFF",
+            "font-size": "16px",
+        },
+        "nav-link": {
+            "font-size": "14px",
+            "text-align": "left",
+            "margin": "2px 0",
+            "border-radius": "10px",
+        },
+        "nav-link-selected": {
+            "background": "linear-gradient(120deg, #7C5CFF, #22D3B0)",
+            "color": "white",
+        },
+    },
+)
+
+st.session_state["page"] = page
 
     st.markdown("---")
     dark = st.toggle("🌙 Dark Mode", value=st.session_state["dark_mode"])
@@ -104,6 +143,58 @@ with st.sidebar:
             "WATSONX_MODEL_ID to your .env file to enable live AI generation."
         )
 
+# ----------------------------------------------------------------------
+# PAGE: Home
+# ----------------------------------------------------------------------
+def render_home_page() -> None:
+    hero(
+    "Welcome",
+    "Your AI Career Mentor",
+    "Build personalized learning roadmaps using IBM Granite AI."
+)
+
+st.markdown("")
+
+col1, col2 = st.columns([1.2,1])
+
+with col1:
+
+    st.markdown("""
+### 🚀 Learn Smarter
+
+Generate:
+
+- AI Career Roadmap
+- Skill Gap Analysis
+- Weekly Learning Plan
+- Project Recommendations
+- Course Suggestions
+- Certification Guide
+
+""")
+
+    if st.button("🚀 Start Your Journey", use_container_width=True):
+        st.session_state["page"] = "Profile"
+        st.rerun()
+
+with col2:
+
+    st.info(
+        """
+🤖 IBM Granite AI
+
+✔ Personalized Learning
+
+✔ Career Guidance
+
+✔ Weekly Roadmaps
+
+✔ PDF Reports
+
+✔ Progress Dashboard
+"""
+    )
+    # Home page code goes here
 
 # ----------------------------------------------------------------------
 # PAGE: Profile
@@ -393,6 +484,7 @@ def render_dashboard_page() -> None:
 # Router
 # ----------------------------------------------------------------------
 PAGES = {
+    "Home": render_home_page,
     "Profile": render_profile_page,
     "AI Roadmap": render_roadmap_page,
     "Skill Gap": render_skill_gap_page,
