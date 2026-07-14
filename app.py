@@ -75,57 +75,58 @@ with st.sidebar:
     st.markdown("---")
 
     page = option_menu(
-    menu_title=None,
-    options=[
-        "Home",
-        "Profile",
-        "AI Roadmap",
-        "Skill Gap",
-        "Courses & Certs",
-        "Progress Tracker",
-        "Dashboard",
-    ],
-    icons=[
-        "house",
-        "person-badge",
-        "signpost-split",
-        "bar-chart-steps",
-        "mortarboard",
-        "check2-square",
-        "grid-1x2",
-    ],
-    default_index=[
-        "Home",
-        "Profile",
-        "AI Roadmap",
-        "Skill Gap",
-        "Courses & Certs",
-        "Progress Tracker",
-        "Dashboard",
-    ].index(st.session_state["page"]),
-    styles={
-        "container": {
-            "padding": "0",
-            "background-color": "transparent",
+        menu_title=None,
+        options=[
+            "Home",
+            "Profile",
+            "AI Roadmap",
+            "Skill Gap",
+            "Courses & Certs",
+            "Progress Tracker",
+            "Dashboard",
+        ],
+        icons=[
+            "house",
+            "person-badge",
+            "signpost-split",
+            "bar-chart-steps",
+            "mortarboard",
+            "check2-square",
+            "grid-1x2",
+        ],
+        default_index=[
+            "Home",
+            "Profile",
+            "AI Roadmap",
+            "Skill Gap",
+            "Courses & Certs",
+            "Progress Tracker",
+            "Dashboard",
+        ].index(st.session_state["page"]),
+        styles={
+            "container": {
+                "padding": "0",
+                "background-color": "transparent",
+            },
+            "icon": {
+                "color": "#7C5CFF",
+                "font-size": "16px",
+            },
+            "nav-link": {
+                "font-size": "14px",
+                "text-align": "left",
+                "margin": "2px 0",
+                "border-radius": "10px",
+            },
+            "nav-link-selected": {
+                "background": "linear-gradient(120deg, #7C5CFF, #22D3B0)",
+                "color": "white",
+            },
         },
-        "icon": {
-            "color": "#7C5CFF",
-            "font-size": "16px",
-        },
-        "nav-link": {
-            "font-size": "14px",
-            "text-align": "left",
-            "margin": "2px 0",
-            "border-radius": "10px",
-        },
-        "nav-link-selected": {
-            "background": "linear-gradient(120deg, #7C5CFF, #22D3B0)",
-            "color": "white",
-        },
-    },
-)
+    )
 
-st.session_state["page"] = page
+    #  Indented correctly with 4 spaces inside the 'with' block
+    st.session_state["page"] = page
 
     st.markdown("---")
     dark = st.toggle("🌙 Dark Mode", value=st.session_state["dark_mode"])
@@ -142,6 +143,7 @@ st.session_state["page"] = page
             "Add WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_URL and "
             "WATSONX_MODEL_ID to your .env file to enable live AI generation."
         )
+
 
 # ----------------------------------------------------------------------
 # PAGE: Home
