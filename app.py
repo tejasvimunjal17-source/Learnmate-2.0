@@ -23,7 +23,6 @@ from backend.roadmap_engine import StudentProfile, generate_roadmap
 from backend.skill_gap import normalize_skill_gaps, overall_readiness_percent
 from backend.pdf_report import build_pdf_report
 from utils.validators import validate_profile
-from backend.google_sheet import save_user
 
 from frontend.styles import inject_css
 from frontend.components import (
@@ -57,11 +56,6 @@ DEFAULTS = {
     "roadmap": None,
     "completed_weeks": set(),
 
-    # User Session
-    "user_logged_in": False,
-    "user_first_name": "",
-    "user_last_name": "",
-    "user_email": "",
 
     "page": "Home",
 }
@@ -86,7 +80,6 @@ with st.sidebar:
         menu_title=None,
         options=[
     "Home",
-    "Register",
     "Profile",
     "AI Roadmap",
     "Skill Gap",
@@ -96,7 +89,6 @@ with st.sidebar:
         ], 
         icons=[
             "house",
-            "person_plus", 
             "person-badge",
             "signpost-split",
             "bar-chart-steps",
@@ -105,8 +97,7 @@ with st.sidebar:
             "grid-1x2",
         ],
         default_index=[
-            "Home",
-            "Register", 
+            "Home", 
             "Profile",
             "AI Roadmap",
             "Skill Gap",
@@ -187,7 +178,7 @@ Generate:
 """)
 
     if st.button("🚀 Start Your Journey", use_container_width=True):
-        st.session_state["page"] = "Register"
+        st.session_state["page"] = "Profile"
         st.rerun()
 
 with col2:
@@ -209,40 +200,7 @@ with col2:
     )
     # Home page code goes here
 
-def render_register_page():
 
-    hero(
-        "Step 1 of 3",
-        "Create Your LearnMate AI Account",
-        "Register once to save your AI learning journey."
-    )
-
-    with st.form("register_form"):
-
-        first_name = st.text_input("First Name *")
-
-        last_name = st.text_input("Last Name *")
-
-        email_address = st.text_input("Email Address *")
-
-        submitted = st.form_submit_button(
-            "Continue",
-            use_container_width=True
-        )
-
-        if submitted:
-            st.success("Button clicked")
-
-            st.session_state["user_logged_in"] = True
-            st.session_state["user_first_name"] = first_name
-            st.session_state["user_last_name"] = last_name
-            st.session_state["user_email_address"] = email_address
-
-            st.session_state["page"] = "Register"
-
-            st.success("Registration Successful!")
-
-            st.rerun()
 # ----------------------------------------------------------------------
 # PAGE: Profile
 # ----------------------------------------------------------------------
@@ -531,8 +489,7 @@ def render_dashboard_page() -> None:
 # Router
 # ----------------------------------------------------------------------
 PAGES = {
-    "Home": render_home_page,
-    "Register": render_register_page, 
+    "Home": render_home_page, 
     "Profile": render_profile_page,
     "AI Roadmap": render_roadmap_page,
     "Skill Gap": render_skill_gap_page,
