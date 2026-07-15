@@ -237,7 +237,7 @@ def render_register_page():
             st.session_state["user_logged_in"] = True
             st.session_state["user_first_name"] = first_name
             st.session_state["user_last_name"] = last_name
-            st.session_state["user_email"] = email
+            st.session_state["user_email_address"] = email_address
 
             st.session_state["page"] = "Register"
 
