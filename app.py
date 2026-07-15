@@ -23,6 +23,7 @@ from backend.roadmap_engine import StudentProfile, generate_roadmap
 from backend.skill_gap import normalize_skill_gaps, overall_readiness_percent
 from backend.pdf_report import build_pdf_report
 from utils.validators import validate_profile
+from backend.google_sheet import save_user
 
 from frontend.styles import inject_css
 from frontend.components import (
@@ -206,6 +207,40 @@ with col2:
     # Home page code goes here
 
 def render_register_page():
+
+    hero(
+        "Step 1 of 3",
+        "Create Your LearnMate AI Account",
+        "Register once to save your AI learning journey."
+    )
+
+    with st.form("register_form"):
+
+        first_name = st.text_input("First Name *")
+
+        last_name = st.text_input("Last Name *")
+
+        email = st.text_input("Email Address *")
+
+        submitted = st.form_submit_button(
+            "Continue",
+            use_container_width=True
+        )
+
+        if submitted:
+
+            save_user(first_name, last_name, email)
+
+            st.session_state["user_logged_in"] = True
+            st.session_state["user_first_name"] = first_name
+            st.session_state["user_last_name"] = last_name
+            st.session_state["user_email"] = email
+
+            st.session_state["page"] = "Profile"
+
+            st.success("Registration Successful!")
+
+            st.rerun()
 # ----------------------------------------------------------------------
 # PAGE: Profile
 # ----------------------------------------------------------------------
