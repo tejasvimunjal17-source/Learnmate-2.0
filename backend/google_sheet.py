@@ -2,7 +2,7 @@ import requests
 from config import CONFIG
 
 
-def save_user(first_name, last_name, email):
+def save_user(first_name, last_name, email_address):
     """Save registration data to Google Sheets."""
 
     data = {
