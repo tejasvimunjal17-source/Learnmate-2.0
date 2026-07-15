@@ -231,8 +231,7 @@ def render_register_page():
         )
 
         if submitted:
-
-            save_user(first_name, last_name, email_address)
+            st.success("Button clicked")
 
             st.session_state["user_logged_in"] = True
             st.session_state["user_first_name"] = first_name
