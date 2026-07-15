@@ -223,7 +223,7 @@ def render_register_page():
 
         last_name = st.text_input("Last Name *")
 
-        email = st.text_input("Email Address *")
+        email_address = st.text_input("Email Address *")
 
         submitted = st.form_submit_button(
             "Continue",
@@ -232,7 +232,7 @@ def render_register_page():
 
         if submitted:
 
-            save_user(first_name, last_name, email)
+            save_user(first_name, last_name, email_address)
 
             st.session_state["user_logged_in"] = True
             st.session_state["user_first_name"] = first_name
