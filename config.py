@@ -68,13 +68,14 @@ class WatsonxConfig:
 def load_config() -> WatsonxConfig:
     """Load and return the application's watsonx.ai configuration."""
     return WatsonxConfig(
-        api_key=_get_env("WATSONX_API_KEY", required=False),
-        project_id=_get_env("WATSONX_PROJECT_ID", required=False),
-        base_url=_get_env("WATSONX_URL", default="https://us-south.ml.cloud.ibm.com"),
-        model_id=_get_env("WATSONX_MODEL_ID", default="ibm/granite-3-8b-instruct"),
-        api_version=_get_env("WATSONX_API_VERSION", default="2024-05-01"),
-        app_env=_get_env("APP_ENV", default="development"),
-    )
+    api_key=_get_env("WATSONX_API_KEY", required=False),
+    project_id=_get_env("WATSONX_PROJECT_ID", required=False),
+    base_url=_get_env("WATSONX_URL", default="https://us-south.ml.cloud.ibm.com"),
+    model_id=_get_env("WATSONX_MODEL_ID", default="ibm/granite-3-8b-instruct"),
+    api_version=_get_env("WATSONX_API_VERSION", default="2024-05-01"),
+    app_env=_get_env("APP_ENV", default="development"),
+    google_sheet_url=_get_env("GOOGLE_SHEET_URL", default=""),
+)
 
 
 # Singleton-style config instance used across the app
