@@ -52,14 +52,13 @@ def _get_env(key: str, default: str | None = None, required: bool = False) -> st
 
 @dataclass(frozen=True)
 class WatsonxConfig:
-    """Immutable, validated configuration for the IBM watsonx.ai connection."""
-
     api_key: str
     project_id: str
     base_url: str
     model_id: str
     api_version: str
     app_env: str
+    google_sheet_url: str
 
     @property
     def is_configured(self) -> bool:
