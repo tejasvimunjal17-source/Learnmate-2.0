@@ -59,6 +59,9 @@ class WatsonxConfig:
     api_version: str
     app_env: str
 
+    orchestrate_api_key: str
+    orchestrate_url: str
+
     @property
     def is_configured(self) -> bool:
         return bool(self.api_key and self.project_id and self.base_url and self.model_id)
