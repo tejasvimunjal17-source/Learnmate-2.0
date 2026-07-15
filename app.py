@@ -55,6 +55,13 @@ DEFAULTS = {
     "profile": None,
     "roadmap": None,
     "completed_weeks": set(),
+
+    # User Session
+    "user_logged_in": False,
+    "user_first_name": "",
+    "user_last_name": "",
+    "user_email": "",
+
     "page": "Home",
 }
 for key, value in DEFAULTS.items():
@@ -198,6 +205,7 @@ with col2:
     )
     # Home page code goes here
 
+def render_register_page():
 # ----------------------------------------------------------------------
 # PAGE: Profile
 # ----------------------------------------------------------------------
@@ -487,6 +495,7 @@ def render_dashboard_page() -> None:
 # ----------------------------------------------------------------------
 PAGES = {
     "Home": render_home_page,
+    "Register": render_register_page
     "Profile": render_profile_page,
     "AI Roadmap": render_roadmap_page,
     "Skill Gap": render_skill_gap_page,
