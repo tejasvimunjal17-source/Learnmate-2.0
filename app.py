@@ -24,6 +24,7 @@ from backend.skill_gap import normalize_skill_gaps, overall_readiness_percent
 from backend.pdf_report import build_pdf_report
 from utils.validators import validate_profile
 
+from frontend.chatbot_widget import render_chatbot
 from frontend.styles import inject_css
 from frontend.components import (
     hero, metric_card, glass_card_open, glass_card_close, progress_bar,
@@ -504,3 +505,4 @@ except Exception as exc:  # noqa: BLE001 - top-level safety net
     logger.exception("Unhandled error rendering page '%s'", st.session_state["page"])
     st.error(f"An unexpected error occurred: {exc}")
     st.caption("Please refresh the page or check the logs for more details.")
+render_chatbot()
