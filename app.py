@@ -93,9 +93,10 @@ with st.sidebar:
     "Courses & Certs",
     "Progress Tracker",
     "Dashboard",
-        ]
+        ], 
         icons=[
             "house",
+            "person_plus", 
             "person-badge",
             "signpost-split",
             "bar-chart-steps",
@@ -105,6 +106,7 @@ with st.sidebar:
         ],
         default_index=[
             "Home",
+            "Register", 
             "Profile",
             "AI Roadmap",
             "Skill Gap",
@@ -237,7 +239,7 @@ def render_register_page():
             st.session_state["user_last_name"] = last_name
             st.session_state["user_email"] = email
 
-            st.session_state["page"] = "Profile"
+            st.session_state["page"] = "Register"
 
             st.success("Registration Successful!")
 
