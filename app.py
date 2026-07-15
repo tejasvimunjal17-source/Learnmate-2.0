@@ -187,7 +187,7 @@ Generate:
 """)
 
     if st.button("🚀 Start Your Journey", use_container_width=True):
-        st.session_state["page"] = "Profile"
+        st.session_state["page"] = "Register"
         st.rerun()
 
 with col2:
