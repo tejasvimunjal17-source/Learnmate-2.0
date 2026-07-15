@@ -58,7 +58,6 @@ class WatsonxConfig:
     model_id: str
     api_version: str
     app_env: str
-    google_sheet_url: str
 
     @property
     def is_configured(self) -> bool:
@@ -74,7 +73,7 @@ def load_config() -> WatsonxConfig:
     model_id=_get_env("WATSONX_MODEL_ID", default="ibm/granite-3-8b-instruct"),
     api_version=_get_env("WATSONX_API_VERSION", default="2024-05-01"),
     app_env=_get_env("APP_ENV", default="development"),
-    google_sheet_url=_get_env("GOOGLE_SHEET_URL", default=""),
+    
 )
 
 
