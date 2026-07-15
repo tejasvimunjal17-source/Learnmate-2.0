@@ -8,3 +8,4 @@ Pillow>=10.4.0
 streamlit-lottie>=0.0.5
 streamlit-option-menu>=0.3.13
 tenacity>=9.0.0
+requests>=2.31.0 
