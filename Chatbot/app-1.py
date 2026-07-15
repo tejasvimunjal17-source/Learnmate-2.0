@@ -350,47 +350,73 @@ WATSONX_EMBED_HTML = """
     <!-- Loading indicator, hidden automatically once the widget mounts -->
     <div id="wxo-loader">
         <div class="spinner"></div>
-        <div>Loading your AI Career Mentor…</div>
+        <div id="wxo-loader-text">Loading your AI Career Mentor…</div>
     </div>
+
+    <!-- REQUIRED: watsonx Orchestrate renders the chat UI into this element
+         when rootElementID is set (direct full-panel render, no launcher
+         bubble). Without this element present, the widget has nowhere to
+         mount and the loader will spin forever. -->
+    <div id="root"></div>
 
     <script>
         // ================================================================
         // IBM watsonx Orchestrate configuration
-        // Copied exactly as supplied — DO NOT modify any IDs or URLs.
+        // orchestrationID, hostURL, deploymentPlatform, crn, agentId and
+        // agentEnvironmentId are copied EXACTLY as supplied — DO NOT modify.
+        // rootElementID / showLauncher are added so the chat renders
+        // directly into the page (full panel) instead of as a launcher
+        // bubble, per the "occupy almost the entire screen" requirement.
         // ================================================================
         window.wxOConfiguration = {
             orchestrationID: "fbf4ce62fa4b472d835ac9afb3ef3200_e7ad8616-b148-4169-9213-0413e10cac69",
             hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+            rootElementID: "root",
+            showLauncher: false,
             deploymentPlatform: "ibmcloud",
             crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/fbf4ce62fa4b472d835ac9afb3ef3200:e7ad8616-b148-4169-9213-0413e10cac69::",
             chatOptions: {
                 agentId: "87fe3ad0-fb0d-4aca-8f7a-78179712c02c",
                 agentEnvironmentId: "b2f40f9b-452b-43f3-b94c-ec90ca6b39f9"
             },
-            onLoad: function (instance) {
+            onLoad: async function (instance) {
                 // Once the widget instance is ready, remove the loader
                 var loader = document.getElementById('wxo-loader');
                 if (loader) { loader.style.display = 'none'; }
-                instance.render();
+                await instance.render();
             }
         };
+
+        // Fallback: if the widget hasn't mounted within 12s (e.g. the
+        // instance is not yet configured for anonymous/public access),
+        // swap the spinner text for a helpful message instead of spinning
+        // forever silently.
+        setTimeout(function () {
+            var loader = document.getElementById('wxo-loader');
+            var root = document.getElementById('root');
+            if (loader && loader.style.display !== 'none' && root && root.childElementCount === 0) {
+                document.getElementById('wxo-loader-text').innerHTML =
+                    'Still connecting… if this persists, the agent may need ' +
+                    'anonymous/public access enabled on the watsonx Orchestrate side.';
+            }
+        }, 12000);
     </script>
 
+    <!-- IBM watsonx Orchestrate loader script.
+         NOTE: this is served from YOUR hostURL, not a fixed CDN domain. -->
     <script>
-        // Fallback: hide the loader after the external script fires 'load',
-        // even if onLoad above is not invoked by the widget for any reason.
-        function hideLoaderFallback() {
-            setTimeout(function () {
-                var loader = document.getElementById('wxo-loader');
-                if (loader) { loader.style.display = 'none'; }
-            }, 4000);
-        }
-    </script>
-
-    <!-- IBM watsonx Orchestrate loader script -->
-    <script
-        src="https://res.cdn.watson-orchestrate.ibm.com/wxoLoader.js"
-        onload="wxoLoader.init(); hideLoaderFallback();">
+        (function () {
+            var script = document.createElement('script');
+            script.src = window.wxOConfiguration.hostURL + '/wxochat/wxoLoader.js?embed=true';
+            script.addEventListener('load', function () {
+                wxoLoader.init();
+            });
+            script.addEventListener('error', function () {
+                document.getElementById('wxo-loader-text').innerHTML =
+                    'Could not reach watsonx Orchestrate. Check your network/CORS settings.';
+            });
+            document.head.appendChild(script);
+        })();
     </script>
 
 </body>
