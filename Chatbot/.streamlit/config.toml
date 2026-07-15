@@ -1,0 +1,17 @@
+[client]
+# Hide the "Deploy" button, Streamlit menu, and the top toolbar
+toolbarMode = "minimal"
+showErrorDetails = false
+
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true
+
+[theme]
+base = "dark"
+primaryColor = "#a78bfa"
+backgroundColor = "#0f0c29"
+secondaryBackgroundColor = "#302b63"
+textColor = "#e5e7eb"
+font = "sans serif"
