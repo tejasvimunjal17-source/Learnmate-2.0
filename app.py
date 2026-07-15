@@ -85,14 +85,15 @@ with st.sidebar:
     page = option_menu(
         menu_title=None,
         options=[
-            "Home",
-            "Profile",
-            "AI Roadmap",
-            "Skill Gap",
-            "Courses & Certs",
-            "Progress Tracker",
-            "Dashboard",
-        ],
+    "Home",
+    "Register",
+    "Profile",
+    "AI Roadmap",
+    "Skill Gap",
+    "Courses & Certs",
+    "Progress Tracker",
+    "Dashboard",
+        ]
         icons=[
             "house",
             "person-badge",
@@ -530,7 +531,7 @@ def render_dashboard_page() -> None:
 # ----------------------------------------------------------------------
 PAGES = {
     "Home": render_home_page,
-    "Register": render_register_page
+    "Register": render_register_page, 
     "Profile": render_profile_page,
     "AI Roadmap": render_roadmap_page,
     "Skill Gap": render_skill_gap_page,
