@@ -76,6 +76,9 @@ def load_config() -> WatsonxConfig:
     model_id=_get_env("WATSONX_MODEL_ID", default="ibm/granite-3-8b-instruct"),
     api_version=_get_env("WATSONX_API_VERSION", default="2024-05-01"),
     app_env=_get_env("APP_ENV", default="development"),
+
+orchestrate_api_key=_get_env("ORCHESTRATE_API_KEY"),
+orchestrate_url=_get_env("ORCHESTRATE_URL"),
     
 )
 
